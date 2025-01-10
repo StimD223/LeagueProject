@@ -101,7 +101,8 @@ def index():
 
 main_amount = 5
 filler = ""
-apiKey = "?api_key=RGAPI-afd0ad5b-8431-4df6-a5ce-f9eb80d10fdb"
+with open("apikey.txt", "r") as file:
+    apiKey = file.read().strip()  # strip() removes any leading/trailing whitespace
 
 def find_id_by_key(json_data, key_value):
     for champion_name, champion_data in json_data["data"].items():

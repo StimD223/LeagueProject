@@ -1,7 +1,5 @@
-import json
 import requests
 from flask import Flask, render_template, request
-from werkzeug.exceptions import BadRequest, abort
 import re
 
 
@@ -41,31 +39,31 @@ def index():
         divideGuide = chopMastery(champMasteries)
         choppedList = graphFive(champMasteries, divideGuide)
 
-        firstelement = choppedList[0];
-        secondelement = choppedList[1];
-        thirdelement = choppedList[2];
-        fourthelement = choppedList[3];
-        fifthelement = choppedList[4];
+        firstelement = choppedList[0]
+        secondelement = choppedList[1]
+        thirdelement = choppedList[2]
+        fourthelement = choppedList[3]
+        fifthelement = choppedList[4]
 
-        firstmastery = champMasteries[0];
-        secondmastery = champMasteries[1];
-        thirdmastery = champMasteries[2];
-        fourthmastery = champMasteries[3];
-        fifthmastery = champMasteries[4];
+        firstmastery = champMasteries[0]
+        secondmastery = champMasteries[1]
+        thirdmastery = champMasteries[2]
+        fourthmastery = champMasteries[3]
+        fifthmastery = champMasteries[4]
 
         champNames = champNames.split(",")
 
-        firstname = champNames[0];
-        secondname = champNames[1];
-        thirdname = champNames[2];
-        fourthname = champNames[3];
-        fifthname = champNames[4];
+        firstname = champNames[0]
+        secondname = champNames[1]
+        thirdname = champNames[2]
+        fourthname = champNames[3]
+        fifthname = champNames[4]
 
-        firstnameimg = champNamesImages[0];
-        secondnameimg = champNamesImages[1];
-        thirdnameimg = champNamesImages[2];
-        fourthnameimg = champNamesImages[3];
-        fifthnameimg = champNamesImages[4];
+        firstnameimg = champNamesImages[0]
+        secondnameimg = champNamesImages[1]
+        thirdnameimg = champNamesImages[2]
+        fourthnameimg = champNamesImages[3]
+        fifthnameimg = champNamesImages[4]
 
 
         return render_template("mainscreen.html",

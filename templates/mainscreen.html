@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>LOL Mains</title>
+        <script src="../javascript/logic.js"></script>
+        <link rel="stylesheet" href="../static/css/stylesheet.css">
+        <link rel = "icon" href = "../static/css/images/lol-logo.png" id = "lol">
+        <style>
+          .rectangle {
+            height: {{ firstelement }}px;
+        }
+          .rectangle2 {
+            height: {{ secondelement }}px;
+        }
+          .rectangle3 {
+            height: {{ thirdelement }}px;
+        }
+          .rectangle4 {
+            height: {{ fourthelement }}px;
+        }
+          .rectangle5 {
+            height: {{ fifthelement }}px;
+        }
+
+          .profile-picture{
+              background-image: url("../css/images/profileicon/{{ icon }}");
+          }
+        </style>
+
+    </head>
+    <body>
+      <div class="sidenav">
+        <button onclick= "myFunction()" class="dropdown-btn">Saved Accounts</button>
+           <div class="search-container">
+               <form method="POST" action="/">
+                    <input type="text" name = "summonerTotal" required value="{{ summonerTotal }}" placeholder="SummonerName#Tag">
+                    <button type="submit"></button>
+               </form>
+           </div>
+      </div>
+
+            <div class="rectangle">
+                <div class="champphoto">
+                    <img src="../static/css/images/champion/{{ firstnameimg }}" onerror="this.style.display='none';">
+                </div>
+                <div class="text-on-rectangle">{{ firstname }}</div>
+                <div class="mastery">{{ firstmastery }}</div>
+            </div>
+            <div class="rectangle2"><div class="champphoto">
+                    <img src="../static/css/images/champion/{{ secondnameimg }}" onerror="this.style.display='none';">
+                </div>
+                <div class="text-on-rectangle">{{ secondname }}</div>
+                <div class="mastery">{{ secondmastery }}</div>
+            </div>
+            <div class="rectangle3">
+                <div class="champphoto">
+                    <img src="../static/css/images/champion/{{ thirdnameimg }}" onerror="this.style.display='none';">
+                </div>
+                <div class="text-on-rectangle">{{ thirdname }}</div>
+                <div class="mastery">{{ thirdmastery }}</div>
+            </div>
+            <div class="rectangle4">
+                <div class="champphoto">
+                    <img src="../static/css/images/champion/{{ fourthnameimg }}" onerror="this.style.display='none';">
+                </div>
+                <div class="text-on-rectangle">{{ fourthname }}</div>
+                <div class="mastery">{{ fourthmastery }}</div>
+            </div>
+            <div class="rectangle5">
+                <div class="champphoto">
+                    <img src="../static/css/images/champion/{{ fifthnameimg }}" onerror="this.style.display='none';">
+                </div>
+                <div class="text-on-rectangle">{{ fifthname }}</div>
+                <div class="mastery">{{ fifthmastery }}</div>
+            </div>
+
+            <div class="header">
+                <div class="profile-picture"><img src="../static/css/images/profileicon/{{ icon }}" onerror="this.style.display='none';"></div>
+                <div class="center-text">{{ capitalized }}</div>
+            </div>
+
+
+
+    </body>
+
+</html>

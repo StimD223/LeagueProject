@@ -1,0 +1,211 @@
+body {
+    background-image: url("../css/images/lolbackground.jpg");
+    background-repeat: no-repeat;
+    background-size: 100vw 100vh;
+    margin: 0;
+    overflow: hidden;
+}
+
+@font-face {
+    font-family: "Beaufort";
+    src: url("../css/images/BeaufortforLOL-Heavy.ttf");
+}
+
+/* Fixed sidenav, full height */
+.sidenav {
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #000000;
+    overflow-x: hidden;
+    padding-top: 20px;
+  }
+
+  /* Style the sidenav links and the dropdown button */
+  .dropdown-btn {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-family: Beaufort;
+    font-size: 30px;
+    color: #acacac;
+    display: block;
+    border: none;
+    background: none;
+    width:100%;
+    text-align: left;
+    cursor: pointer;
+    outline: none;
+  }
+
+  .dropdown-content{
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-family: Beaufort;
+    font-size: 30px;
+    color: #acacac;
+    display: none;
+    border: none;
+    background: none;
+    width:100%;
+    text-align: left;
+    cursor: pointer;
+    outline: none;
+  }
+
+  /* On mouse-over */
+  .sidenav a:hover, .dropdown-btn:hover {
+    color: #f1f1f1;
+  }
+
+.rectangle, .rectangle2, .rectangle3, .rectangle4, .rectangle5 {
+    width: 250px;
+    bottom: 0px;
+    background-image: url("../css/images/blue.jpg");
+    background-size: cover; /* Ensure the image fits within the div */
+    background-position: center; /* Center the image within the div */
+    position: absolute;
+    transform: scaleY(-1);
+    display: flex;
+    flex-direction: column-reverse;
+    text-align: center;
+    justify-items: flex-start;
+}
+
+  .rectangle {
+      right: 1400px;
+  }
+
+  .rectangle2 {
+      right: 1075px;
+  }
+
+  .rectangle3 {
+      right: 725px;
+  }
+
+  .rectangle4 {
+      right: 375px;
+  }
+
+  .rectangle5 {
+      right: 25px;
+  }
+
+  .champphoto img{
+      width: 100px; /* Adjust image width */
+      height: 100px; /* Adjust image height */
+      object-fit: cover; /* Ensure proper scaling of the image */
+      transform: scaleY(-1);
+      position: relative;
+      top: 105px;
+      text-align: center;
+  }
+
+
+  .text-on-rectangle {
+      position: relative; /* Position relative to the parent rectangle */
+      color: white; /* Text color */
+      font-family: "Beaufort", sans-serif; /* Your custom font */
+      font-size: 1.5em; /* Adjust font size */
+      transform: scaleY(-1);
+      text-align: center;
+      top: 105px;
+  }
+
+    .mastery {
+          position: relative; /* Position relative to the parent rectangle */
+          color: white; /* Text color */
+          font-family: "Beaufort", sans-serif; /* Your custom font */
+          font-size: 1em; /* Adjust font size */
+          text-align: center;
+          transform: scaleY(-1);
+          top: 105px;
+
+    }
+
+
+
+  .center-text {
+            position: absolute;
+            top: 20px; /* Adjust the distance from the top */
+            left: 55%;
+            transform: translateX(-50%);
+            font-family: "Beaufort", sans-serif;
+            font-size: 50px; /* Adjust size */
+            color: #f1f1f1; /* Text color */
+            text-shadow: 2px 2px 4px rgba(238, 238, 0, 0.5); /* Optional text shadow */
+          }
+
+
+
+  .profile-picture img{
+    position: absolute;
+    top: 80px; /* Adjust as necessary */
+    left: 51.125%; /* Adjust as necessary */
+    width: 150px;
+    height: 150px;
+      border-radius: 150px;
+  }
+
+   .sidenav {
+              height: 100%;
+              width: 200px;
+              position: fixed;
+              z-index: 1;
+              top: 0;
+              left: 0;
+              background-color: #000000;
+              overflow-x: hidden;
+              padding-top: 20px;
+          }
+
+          /* Search bar styles */
+          .search-container {
+              position: absolute;
+              bottom: 60px;
+              left: 5px;
+              width: 150px;
+          }
+
+          .search-container input {
+              width: 100%;
+              padding: 15px;
+              font-size: 14px;
+              font-family: "Beaufort";
+              border-radius: 4px;
+              border: none;
+              background-color: #000000;
+              color: #ffffff;
+          }
+
+          .search-container input::placeholder {
+            color: #676767; /* White placeholder text */
+            }
+
+          .search-container button {
+              position: absolute;
+                right:-30px;
+                top: 40px;
+                padding: 10px;
+                background-color: transparent;
+                border: none;
+                color: white;
+                font-size: 40px; /* Adjust the size of the arrow */
+                width: 30px; /* Size of the button */
+                height: 40px; /* Make the button a circle */
+                cursor: pointer;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                transition: background-color 0.3s ease; /* Smooth hover effect */
+            }
+            /* Use a right arrow character inside the button */
+          .search-container button::before {
+                content: "→"; /* Unicode arrow */
+                font-size: 30px; /* Adjust the size of the arrow */
+          }
+
+

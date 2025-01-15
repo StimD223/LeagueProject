@@ -32,7 +32,13 @@
     </head>
     <body>
       <div class="sidenav">
-        <button onclick= "myFunction()" class="dropdown-btn">Saved Accounts</button>
+          <div class="dropdown">
+              <button>Saved Accounts</button>
+              <div class = "content">
+                  <a href="">Yo</a>
+                  <a href="">Hello</a>
+              </div>
+          </div>
            <div class="search-container">
                <form method="POST" action="/">
                     <input type="text" name = "summonerTotal" required value="{{ summonerTotal }}" placeholder="SummonerName#Tag">

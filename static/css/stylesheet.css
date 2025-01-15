@@ -22,14 +22,15 @@ body {
     background-color: #000000;
     overflow-x: hidden;
     padding-top: 20px;
+
   }
 
   /* Style the sidenav links and the dropdown button */
-  .dropdown-btn {
+  .dropdown button{
     padding: 6px 8px 6px 16px;
     text-decoration: none;
     font-family: Beaufort;
-    font-size: 30px;
+    font-size: 35px;
     color: #acacac;
     display: block;
     border: none;
@@ -38,14 +39,15 @@ body {
     text-align: left;
     cursor: pointer;
     outline: none;
+      position: relative;
+
   }
 
-  .dropdown-content{
-    padding: 6px 8px 6px 16px;
+  .dropdown .content{
+      padding: 6px 8px 6px 16px;
     text-decoration: none;
     font-family: Beaufort;
-    font-size: 30px;
-    color: #acacac;
+      color: #acacac;
     display: none;
     border: none;
     background: none;
@@ -53,10 +55,18 @@ body {
     text-align: left;
     cursor: pointer;
     outline: none;
+      font-size: 25px;
+      position: relative;
+
+  }
+
+  .dropdown button:hover .content{
+      display: block;
+
   }
 
   /* On mouse-over */
-  .sidenav a:hover, .dropdown-btn:hover {
+  .sidenav a:hover, .dropdown button:hover{
     color: #f1f1f1;
   }
 

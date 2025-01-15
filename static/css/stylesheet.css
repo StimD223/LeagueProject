@@ -55,18 +55,14 @@ body {
     text-align: left;
     cursor: pointer;
     outline: none;
-      font-size: 25px;
+      font-size: 20px;
       position: relative;
 
   }
 
-  .dropdown button:hover .content{
-      display: block;
-
-  }
 
   /* On mouse-over */
-  .sidenav a:hover, .dropdown button:hover{
+  .sidenav a:hover, .dropdown button:hover, .dropdown .content:hover{
     color: #f1f1f1;
   }
 

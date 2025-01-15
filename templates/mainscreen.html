@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>LOL Mains</title>
-        <script src="../javascript/logic.js"></script>
+
         <link rel="stylesheet" href="../static/css/stylesheet.css">
         <link rel = "icon" href = "../static/css/images/lol-logo.png" id = "lol">
         <style>
@@ -33,12 +33,24 @@
     <body>
       <div class="sidenav">
           <div class="dropdown">
-              <button>Saved Accounts</button>
-              <div class = "content">
-                  <a href="">Yo</a>
-                  <a href="">Hello</a>
+          <button id = "dropdownbutton">Saved Accounts</button>
+              <div class = "content" id = "dropdowncontent">
+                  <form method="POST" action="/">
+
+                  </form>
               </div>
+
           </div>
+          <script>
+              var dropdownbutton = document.getElementById("dropdownbutton");
+              var dropdowncontent = document.getElementById("dropdowncontent");
+              dropdownbutton.addEventListener("click", function () {
+                  if (dropdowncontent.style.display === "block") {
+                      dropdowncontent.style.display = "none";
+                  }
+                  else (dropdowncontent.style.display = "block");
+              });
+          </script>
            <div class="search-container">
                <form method="POST" action="/">
                     <input type="text" name = "summonerTotal" required value="{{ summonerTotal }}" placeholder="SummonerName#Tag">

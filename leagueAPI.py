@@ -1,10 +1,36 @@
 import requests
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, flash
 import re
-
+from flask_sqlalchemy import SQLAlchemy
 
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///profiles.db"
+db = SQLAlchemy(app)
+
+class Profiles(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(200), nullable=False, unique=True)
+
+
+    def __repr__(self):
+        return "<Name %r>" % self.name
+
+@app.route('/user/add', methods=['GET', 'POST'])
+def addUser():
+    summonerTotal = request.form['summonerTotal']
+    if summonerTotal.validate_on_submit():
+        user = Profiles.query.filter_by(name=summonerTotal.name.data).first()
+        if user is None:
+            user = Profiles(name=summonerTotal.name.data)
+            db.session.add(user)
+            db.session.commit()
+        name = summonerTotal.name.data
+        summonerTotal.name.data = ""
+        flash("User added successfully")
+    our_users = Profiles.query.order_by(Profiles).all()
+
+    return render_template("mainscreen.html", summonerTotal=summonerTotal, name=name, our_users = our_users)
 @app.route("/", methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':

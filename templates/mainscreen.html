@@ -34,22 +34,30 @@
       <div class="sidenav">
           <div class="dropdown">
           <button id = "dropdownbutton">Saved Accounts</button>
-              <div class = "content" id = "dropdowncontent">
-                  <form method="POST" action="/">
-
-                  </form>
-              </div>
+              <form method = "POST" action="/">
+                  <input class = "content" type="submit" name = "summonerTotal" required value = "tyler#NA1">
+                  <input class = "content" type="submit" name = "summonerTotal" required value = "RaggedyShoes#NA1">
+              </form>
 
           </div>
           <script>
-              var dropdownbutton = document.getElementById("dropdownbutton");
-              var dropdowncontent = document.getElementById("dropdowncontent");
-              dropdownbutton.addEventListener("click", function () {
-                  if (dropdowncontent.style.display === "block") {
-                      dropdowncontent.style.display = "none";
-                  }
-                  else (dropdowncontent.style.display = "block");
-              });
+              var dropdownButton = document.getElementById("dropdownbutton");
+                var savedAccounts = document.getElementsByClassName("content");
+
+                dropdownButton.addEventListener("click", function () {
+                    // Loop through each element in the savedAccounts collection
+                    for (var i = 0; i < savedAccounts.length; i++) {
+                        var account = savedAccounts[i];
+                        // Toggle display for each account input
+                        if (account.style.display === "block") {
+                            account.style.display = "none";
+                        } else {
+                            account.style.display = "block";
+                        }
+                    }
+                });
+
+
           </script>
            <div class="search-container">
                <form method="POST" action="/">

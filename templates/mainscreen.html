@@ -43,8 +43,8 @@
           </div>
 
           {% if profile_loaded %}
-              <div class="save">
-                <button>Save</button>
+              <div class="save" id="save">
+                <button id = "saveButton">Save</button>
               </div>
           {% endif %}
 
@@ -100,6 +100,7 @@
             <script>
                 var dropdownButton = document.getElementById("dropdownbutton");
                 var savedAccounts = document.getElementsByClassName("content");
+                var saveButton = document.getElementById("saveButton");
 
                 dropdownButton.addEventListener("click", function () {
                     // Loop through each element in the savedAccounts collection
@@ -113,6 +114,13 @@
                         }
                     }
                 });
+
+                saveButton.addEventListener("click", function() {
+
+
+                });
+
+
             </script>
     </body>
 

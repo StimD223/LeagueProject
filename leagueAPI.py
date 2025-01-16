@@ -1,38 +1,29 @@
-from operator import truediv
-
 import requests
-from flask import Flask, render_template, request, flash
+from flask import Flask, render_template, request, session
 import re
 from flask_sqlalchemy import SQLAlchemy
 
-
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///profiles.db"
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///profiles.db'  # Replace with your database URI
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Optional: to suppress a warning
+app.config['SECRET_KEY'] = 'omp02qrp05'
 db = SQLAlchemy(app)
+
 
 class Profiles(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(200), nullable=False, unique=True)
 
-
     def __repr__(self):
-        return "<Name %r>" % self.name
+        return f"<Name {self.name}>"
 
-@app.route('/user/add', methods=['GET', 'POST'])
-def addUser():
-    summonerTotal = request.form['summonerTotal']
-    if summonerTotal.validate_on_submit():
-        user = Profiles.query.filter_by(name=summonerTotal.name.data).first()
-        if user is None:
-            user = Profiles(name=summonerTotal.name.data)
-            db.session.add(user)
-            db.session.commit()
-        name = summonerTotal.name.data
-        summonerTotal.name.data = ""
-        flash("User added successfully")
-    our_users = Profiles.query.order_by(Profiles).all()
+@app.route("/save", methods=["POST"])
+def save_profile():
+    seperateName = session.get("seperateName")
+    print(seperateName)
+    return render_template("mainscreen.html")
 
-    return render_template("mainscreen.html", summonerTotal=summonerTotal, name=name, our_users = our_users)
+
 @app.route("/", methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
@@ -43,6 +34,9 @@ def index():
             return render_template("mainscreen.html",
                                    error="Invalid Summoner Name. Please include '#' in the format 'Name#Tag'")
         print(summonerTotal)
+        seperateName = summonerTotal
+        session['seperateName'] = seperateName
+
         summonerName, summonerTag = summonerTotal.split('#')
         try:
             puuid, capitalized = grabPUUID(summonerName, summonerTag, apiKey)
@@ -125,9 +119,10 @@ def index():
                                capitalized=capitalized,
                                icon = f"{icon}.png",
                                profile_loaded = profile_loaded
-
                                )
+
     return render_template("mainscreen.html", summonerTotal=filler)
+
 
 main_amount = 5
 filler = ""
@@ -213,6 +208,8 @@ def grabChampNamesMastery(champID, champkeydict):
     return output_string, champion_masteries, champion_names_img
 
 def main():
+    with app.app_context():
+        db.create_all()
     app.run()
 
 
@@ -221,3 +218,4 @@ def main():
     
 if __name__ == "__main__":
     main()
+

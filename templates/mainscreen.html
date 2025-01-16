@@ -32,20 +32,20 @@
     </head>
     <body>
       <div class="sidenav">
-
           <div class="dropdown">
-          <button id = "dropdownbutton">Saved Accounts</button>
-              <form method = "POST" action="/">
-                  <input class = "content" type="submit" name = "summonerTotal" required value = "tyler#NA1">
-                  <input class = "content" type="submit" name = "summonerTotal" required value = "RaggedyShoes#NA1">
-              </form>
-
+                <button id="dropdownbutton">Saved Accounts</button>
+                    <form method="POST" action="/">
+                        <input class="content" type="submit" name="summonerTotal" value="RaggedyShoes#NA1">
+                    </form>
           </div>
 
           {% if profile_loaded %}
-              <div class="save" id="save">
-                <button id = "saveButton">Save</button>
-              </div>
+            <div class="save" id="save">
+                <form method="POST" action="/save">
+                    <input type="hidden" name="summonerTotal" value="{{ summonerTotal }}">
+                    <button type="submit">Save</button>
+                </form>
+            </div>
           {% endif %}
 
            <div class="search-container">
@@ -100,7 +100,8 @@
             <script>
                 var dropdownButton = document.getElementById("dropdownbutton");
                 var savedAccounts = document.getElementsByClassName("content");
-                var saveButton = document.getElementById("saveButton");
+                const saveButton = document.getElementById("saveButton");
+
 
                 dropdownButton.addEventListener("click", function () {
                     // Loop through each element in the savedAccounts collection
@@ -115,11 +116,8 @@
                     }
                 });
 
-                saveButton.addEventListener("click", function() {
-
-
+                saveButton.addEventListener("click", function () {
                 });
-
 
             </script>
     </body>

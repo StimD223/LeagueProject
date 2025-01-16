@@ -32,6 +32,7 @@
     </head>
     <body>
       <div class="sidenav">
+
           <div class="dropdown">
           <button id = "dropdownbutton">Saved Accounts</button>
               <form method = "POST" action="/">
@@ -40,25 +41,11 @@
               </form>
 
           </div>
-          <script>
-              var dropdownButton = document.getElementById("dropdownbutton");
-                var savedAccounts = document.getElementsByClassName("content");
 
-                dropdownButton.addEventListener("click", function () {
-                    // Loop through each element in the savedAccounts collection
-                    for (var i = 0; i < savedAccounts.length; i++) {
-                        var account = savedAccounts[i];
-                        // Toggle display for each account input
-                        if (account.style.display === "block") {
-                            account.style.display = "none";
-                        } else {
-                            account.style.display = "block";
-                        }
-                    }
-                });
+          <div class="save">
+              <button>Save</button>
+          </div>
 
-
-          </script>
            <div class="search-container">
                <form method="POST" action="/">
                     <input type="text" name = "summonerTotal" required value="{{ summonerTotal }}" placeholder="SummonerName#Tag">
@@ -108,7 +95,23 @@
             </div>
 
 
+            <script>
+                var dropdownButton = document.getElementById("dropdownbutton");
+                var savedAccounts = document.getElementsByClassName("content");
 
+                dropdownButton.addEventListener("click", function () {
+                    // Loop through each element in the savedAccounts collection
+                    for (var i = 0; i < savedAccounts.length; i++) {
+                        var account = savedAccounts[i];
+                        // Toggle display for each account input
+                        if (account.style.display === "block") {
+                            account.style.display = "none";
+                        } else {
+                            account.style.display = "block";
+                        }
+                    }
+                });
+            </script>
     </body>
 
 </html>

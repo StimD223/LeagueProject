@@ -39,8 +39,7 @@ body {
     text-align: left;
     cursor: pointer;
     outline: none;
-      position: relative;
-
+    position: relative;
   }
 
   .dropdown .content{
@@ -57,7 +56,6 @@ body {
     outline: none;
       font-size: 15px;
       position: relative;
-
   }
 
 
@@ -166,13 +164,15 @@ body {
               background-color: #000000;
               overflow-x: hidden;
               padding-top: 20px;
+              display: flex; /* Use flexbox layout */
+              flex-direction: column; /* Stack children vertically */
           }
 
           /* Search bar styles */
           .search-container {
               position: absolute;
               bottom: 60px;
-              left: 5px;
+              left: 10px;
               width: 150px;
           }
 
@@ -193,6 +193,7 @@ body {
 
           .search-container button {
               position: absolute;
+              margin-left: 20px;
                 right:-30px;
                 top: 40px;
                 padding: 10px;
@@ -214,4 +215,31 @@ body {
                 font-size: 30px; /* Adjust the size of the arrow */
           }
 
+          .save{
+              position: absolute;
+              width: 100%;
+              top: 665px;
+          }
 
+
+        .save button {
+
+            width: 92%;
+            margin-left: 8px;
+            padding: 15px; /* Adds padding for a larger click area */
+            font-family: "Beaufort", sans-serif; /* Matches the font */
+            font-size: 25px; /* Adjust font size */
+            color: #acacac; /* Text color */
+            background-color: #000000; /* Background color of the button */
+            border: 2px solid gold; /* Gold border */
+            border-radius: 5px; /* Slightly rounded corners */
+            cursor: pointer; /* Indicates the button is clickable */
+            text-transform: uppercase; /* Makes the text all caps */
+            letter-spacing: 2px; /* Adds spacing between letters */
+            transition: background-color 0.3s ease, color 0.3s ease; /* Smooth hover effect */
+        }
+
+        .save button:hover {
+            background-color: gold; /* Changes background color on hover */
+            color: black; /* Changes text color on hover */
+        }

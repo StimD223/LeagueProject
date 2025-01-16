@@ -1,3 +1,5 @@
+from operator import truediv
+
 import requests
 from flask import Flask, render_template, request, flash
 import re
@@ -65,6 +67,8 @@ def index():
         divideGuide = chopMastery(champMasteries)
         choppedList = graphFive(champMasteries, divideGuide)
 
+        profile_loaded = True
+
         firstelement = choppedList[0]
         secondelement = choppedList[1]
         thirdelement = choppedList[2]
@@ -119,7 +123,9 @@ def index():
 
 
                                capitalized=capitalized,
-                               icon = f"{icon}.png"
+                               icon = f"{icon}.png",
+                               profile_loaded = profile_loaded
+
                                )
     return render_template("mainscreen.html", summonerTotal=filler)
 

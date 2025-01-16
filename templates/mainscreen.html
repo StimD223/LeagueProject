@@ -42,9 +42,11 @@
 
           </div>
 
-          <div class="save">
-              <button>Save</button>
-          </div>
+          {% if profile_loaded %}
+              <div class="save">
+                <button>Save</button>
+              </div>
+          {% endif %}
 
            <div class="search-container">
                <form method="POST" action="/">

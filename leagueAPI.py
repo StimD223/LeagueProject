@@ -21,113 +21,104 @@ class Profiles(db.Model):
 def save_profile():
     seperateName = session.get("seperateName")
     print(seperateName)
-    return render_template("mainscreen.html")
+    if seperateName:
+        existing_profile = Profiles.query.filter_by(name=seperateName).first()
+        if not existing_profile:
+            new_profile = Profiles(name=seperateName)
+            db.session.add(new_profile)
+            db.session.commit()
+
+        # Return the same as the index route
+    return render_main_screen(summonerTotal=seperateName)
 
 
 @app.route("/", methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
-
         summonerTotal = request.form['summonerTotal']
-        if not summonerTotal or "#" not in summonerTotal:
-            # Instead of Flask's default "Bad Request" screen, render a custom page or error message
-            return render_template("mainscreen.html",
-                                   error="Invalid Summoner Name. Please include '#' in the format 'Name#Tag'")
-        print(summonerTotal)
-        seperateName = summonerTotal
-        session['seperateName'] = seperateName
+        session['seperateName'] = summonerTotal  # Store in session
+        return render_main_screen(summonerTotal=summonerTotal)
 
-        summonerName, summonerTag = summonerTotal.split('#')
-        try:
-            puuid, capitalized = grabPUUID(summonerName, summonerTag, apiKey)
-        except Exception as e:
-            # Handle specific errors or log the exception
-            print(f"Error in grabChampNamesMastery: {e}")
-            return render_template("mainscreen.html",
-                                   error="Failed to retrieve champion mastery data. Please try again.")
-
-        icon = grabIcon(puuid, apiKey)
-
-        champID = grabChampionID(puuid, apiKey)
-        champkeydict = grabChampKeyDict()
-        try:
-            champNames, champMasteries, champNamesImages = grabChampNamesMastery(champID, champkeydict)
-        except Exception as e:
-            # Handle specific errors or log the exception
-            print(f"Error in grabChampNamesMastery: {e}")
-            return render_template("mainscreen.html",
-                                   error="Failed to retrieve champion mastery data. Please try again.")
-
-        divideGuide = chopMastery(champMasteries)
-        choppedList = graphFive(champMasteries, divideGuide)
-
-        profile_loaded = True
-
-        firstelement = choppedList[0]
-        secondelement = choppedList[1]
-        thirdelement = choppedList[2]
-        fourthelement = choppedList[3]
-        fifthelement = choppedList[4]
-
-        firstmastery = champMasteries[0]
-        secondmastery = champMasteries[1]
-        thirdmastery = champMasteries[2]
-        fourthmastery = champMasteries[3]
-        fifthmastery = champMasteries[4]
-
-        champNames = champNames.split(",")
-
-        firstname = champNames[0]
-        secondname = champNames[1]
-        thirdname = champNames[2]
-        fourthname = champNames[3]
-        fifthname = champNames[4]
-
-        firstnameimg = champNamesImages[0]
-        secondnameimg = champNamesImages[1]
-        thirdnameimg = champNamesImages[2]
-        fourthnameimg = champNamesImages[3]
-        fifthnameimg = champNamesImages[4]
-
-
-        return render_template("mainscreen.html",
-                               firstelement=firstelement,
-                               secondelement=secondelement,
-                               thirdelement=thirdelement,
-                               fourthelement=fourthelement,
-                               fifthelement=fifthelement,
-
-                               firstmastery=firstmastery,
-                               secondmastery=secondmastery,
-                               thirdmastery=thirdmastery,
-                               fourthmastery=fourthmastery,
-                               fifthmastery=fifthmastery,
-
-                               firstname=firstname,
-                               secondname=secondname,
-                               thirdname=thirdname,
-                               fourthname=fourthname,
-                               fifthname=fifthname,
-
-                               firstnameimg=firstnameimg,
-                               secondnameimg=secondnameimg,
-                               thirdnameimg=thirdnameimg,
-                               fourthnameimg=fourthnameimg,
-                               fifthnameimg=fifthnameimg,
-
-
-                               capitalized=capitalized,
-                               icon = f"{icon}.png",
-                               profile_loaded = profile_loaded
-                               )
-
-    return render_template("mainscreen.html", summonerTotal=filler)
+    saved_profiles = Profiles.query.all()
+    return render_main_screen(error=None, saved_profiles=saved_profiles)
 
 
 main_amount = 5
 filler = ""
 with open("apikey.txt", "r") as file:
     apiKey = file.read().strip()  # strip() removes any leading/trailing whitespace
+
+def render_main_screen(summonerTotal=None, error=None, saved_profiles=None):
+
+    if saved_profiles is None:
+        saved_profiles = Profiles.query.all()
+
+    if not summonerTotal or "#" not in summonerTotal:
+        return render_template("mainscreen.html",
+                               error=error or "Invalid Summoner Name. Please include '#' in the format 'Name#Tag'",
+                               saved_profiles=saved_profiles)
+
+    summonerName, summonerTag = summonerTotal.split('#')
+    try:
+        puuid, capitalized = grabPUUID(summonerName, summonerTag, apiKey)
+    except Exception as e:
+        print(f"Error in grabChampNamesMastery: {e}")
+        return render_template("mainscreen.html",
+                               error="Failed to retrieve champion mastery data. Please try again.", saved_profiles=saved_profiles)
+
+    icon = grabIcon(puuid, apiKey)
+    champID = grabChampionID(puuid, apiKey)
+    champkeydict = grabChampKeyDict()
+
+    try:
+        champNames, champMasteries, champNamesImages = grabChampNamesMastery(champID, champkeydict)
+    except Exception as e:
+        print(f"Error in grabChampNamesMastery: {e}")
+        return render_template("mainscreen.html",
+                               error="Failed to retrieve champion mastery data. Please try again.", saved_profiles=saved_profiles)
+
+    divideGuide = chopMastery(champMasteries)
+    choppedList = graphFive(champMasteries, divideGuide)
+
+    profile_loaded = True
+
+    firstelement, secondelement, thirdelement, fourthelement, fifthelement = choppedList
+    firstmastery, secondmastery, thirdmastery, fourthmastery, fifthmastery = champMasteries[:5]
+    champNames = champNames.split(",")
+    firstname, secondname, thirdname, fourthname, fifthname = champNames[:5]
+    firstnameimg, secondnameimg, thirdnameimg, fourthnameimg, fifthnameimg = champNamesImages[:5]
+
+    return render_template("mainscreen.html",
+                           firstelement=firstelement,
+                           secondelement=secondelement,
+                           thirdelement=thirdelement,
+                           fourthelement=fourthelement,
+                           fifthelement=fifthelement,
+
+                           firstmastery=firstmastery,
+                           secondmastery=secondmastery,
+                           thirdmastery=thirdmastery,
+                           fourthmastery=fourthmastery,
+                           fifthmastery=fifthmastery,
+
+                           firstname=firstname,
+                           secondname=secondname,
+                           thirdname=thirdname,
+                           fourthname=fourthname,
+                           fifthname=fifthname,
+
+                           firstnameimg=firstnameimg,
+                           secondnameimg=secondnameimg,
+                           thirdnameimg=thirdnameimg,
+                           fourthnameimg=fourthelement,
+                           fifthnameimg=fifthelement,
+
+                           capitalized=capitalized,
+                           icon=f"{icon}.png",
+                           profile_loaded=profile_loaded,
+                           saved_profiles=saved_profiles
+                           )
+
 
 def find_id_by_key(json_data, key_value):
     for champion_name, champion_data in json_data["data"].items():

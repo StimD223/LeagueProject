@@ -35,7 +35,9 @@
           <div class="dropdown">
                 <button id="dropdownbutton">Saved Accounts</button>
                     <form method="POST" action="/">
-                        <input class="content" type="submit" name="summonerTotal" value="RaggedyShoes#NA1">
+                        {% for profile in saved_profiles %}
+                            <input class="content" type="submit" name="summonerTotal" value="{{ profile.name }}">
+                        {% endfor %}
                     </form>
           </div>
 

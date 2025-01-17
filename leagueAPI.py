@@ -17,6 +17,17 @@ class Profiles(db.Model):
     def __repr__(self):
         return f"<Name {self.name}>"
 
+@app.route("/delete/<int:profile_id>", methods=["POST"])
+def delete_profile(profile_id):
+    profile_to_delete = Profiles.query.get_or_404(profile_id)  # Get profile or return 404
+    try:
+        db.session.delete(profile_to_delete)  # Delete the profile
+        db.session.commit()  # Commit changes
+        return render_main_screen(saved_profiles=Profiles.query.all())  # Reload main screen
+    except Exception as e:
+        print(f"Error deleting profile: {e}")
+        return render_main_screen(error="Error deleting profile.", saved_profiles=Profiles.query.all())
+
 @app.route("/save", methods=["POST"])
 def save_profile():
     seperateName = session.get("seperateName")
@@ -88,6 +99,7 @@ def render_main_screen(summonerTotal=None, error=None, saved_profiles=None):
     firstname, secondname, thirdname, fourthname, fifthname = champNames[:5]
     firstnameimg, secondnameimg, thirdnameimg, fourthnameimg, fifthnameimg = champNamesImages[:5]
 
+
     return render_template("mainscreen.html",
                            firstelement=firstelement,
                            secondelement=secondelement,
@@ -110,8 +122,8 @@ def render_main_screen(summonerTotal=None, error=None, saved_profiles=None):
                            firstnameimg=firstnameimg,
                            secondnameimg=secondnameimg,
                            thirdnameimg=thirdnameimg,
-                           fourthnameimg=fourthelement,
-                           fifthnameimg=fifthelement,
+                           fourthnameimg=fourthnameimg,
+                           fifthnameimg=fifthnameimg,
 
                            capitalized=capitalized,
                            icon=f"{icon}.png",

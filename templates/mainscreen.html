@@ -34,12 +34,17 @@
       <div class="sidenav">
           <div class="dropdown">
                 <button id="dropdownbutton">Saved Accounts</button>
-                    <form method="POST" action="/">
-                        {% for profile in saved_profiles %}
-                            <input class="content" type="submit" name="summonerTotal" value="{{ profile.name }}">
-                        {% endfor %}
+                {% for profile in saved_profiles %}
+                <div style="display: flex; align-items: center; justify-content: space-between; margin: 5px 0;">
+                    <form method="POST" action="/" style="margin-right: auto;">
+                        <input class="content" type="submit" name="summonerTotal" value="{{ profile.name }}">
                     </form>
-          </div>
+                    <form method="POST" action="/delete/{{ profile.id }}" style="margin-left: 10px">
+                        <button type="submit" id = "deletebutton" class="delete-btn" title="Delete Profile" style="font-size: 20px; display: none">×</button>
+                    </form>
+                </div>
+                {% endfor %}
+            </div>
 
           {% if profile_loaded %}
             <div class="save" id="save">
@@ -102,24 +107,29 @@
             <script>
                 var dropdownButton = document.getElementById("dropdownbutton");
                 var savedAccounts = document.getElementsByClassName("content");
-                const saveButton = document.getElementById("saveButton");
+                var deleteButton = document.getElementsByClassName("delete-btn")
 
 
                 dropdownButton.addEventListener("click", function () {
                     // Loop through each element in the savedAccounts collection
                     for (var i = 0; i < savedAccounts.length; i++) {
                         var account = savedAccounts[i];
+                        var deletion = deleteButton[i];
                         // Toggle display for each account input
                         if (account.style.display === "block") {
                             account.style.display = "none";
                         } else {
                             account.style.display = "block";
                         }
+
+                        if (deletion.style.display === "block") {
+                            deletion.style.display = "none";
+                        } else {
+                            deletion.style.display = "block";
+                        }
                     }
                 });
 
-                saveButton.addEventListener("click", function () {
-                });
 
             </script>
     </body>

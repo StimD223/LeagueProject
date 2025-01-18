@@ -34,3 +34,5 @@ The repository is organized as follows:
    pip install re
    pip install flask
    pip install sqlalchemy
+
+3. **Visit the Riot API Site and Get A Dev Key**

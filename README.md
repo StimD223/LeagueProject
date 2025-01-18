@@ -28,7 +28,7 @@ The repository is organized as follows:
    ```bash
    git clone https://github.com/StimD223/LeagueProject.git
 
-2. **Pip Install the following:
+2. **Pip Install the following**:
    ```bash
    pip install requests
    pip install re

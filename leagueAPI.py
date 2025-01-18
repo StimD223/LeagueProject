@@ -6,7 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///profiles.db'  # Replace with your database URI
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Optional: to suppress a warning
-app.config['SECRET_KEY'] = 'omp02qrp05'
+app.config['SECRET_KEY'] = 
 db = SQLAlchemy(app)
 
 

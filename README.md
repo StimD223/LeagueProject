@@ -29,7 +29,8 @@ The repository is organized as follows:
    git clone https://github.com/StimD223/LeagueProject.git
 
 2. **Pip Install the following:
-   requests
-   re
-   flask
-   sqlalchemy
+   ```bash
+   pip install requests
+   pip install re
+   pip install flask
+   pip install sqlalchemy
